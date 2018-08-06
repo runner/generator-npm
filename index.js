@@ -7,8 +7,8 @@
 var path  = require('path'),
     exec  = require('child_process').exec,
     name  = 'npm',
-    tools = require('@runner/tools'),
-    log   = require('@runner/logger').wrap(name);
+    tools = require('runner-tools'),
+    log   = require('runner-logger').wrap(name);
 
 
 function publish ( config, done ) {

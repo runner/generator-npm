@@ -1,5 +1,5 @@
 {
-    "name": "@runner/generator-npm",
+    "name": "runner-generator-npm",
     "version": "1.0.0",
     "description": "Tasks generator for npm",
     "author": {
@@ -10,16 +10,13 @@
         "type": "git",
         "url": "https://github.com/runner/generator-npm.git"
     },
-    "publishConfig": {
-        "access": "public"
-    },
     "scripts": {
         "lint": "eslint .",
         "test": "npm run lint"
     },
     "dependencies": {
-        "@runner/logger": "^1.0.0",
-        "@runner/tools": "^1.2.0"
+        "runner-logger": "^1.0.0",
+        "runner-tools": "^1.2.0"
     },
     "devDependencies": {
         "cjs-eslint": "^1.1.1"
