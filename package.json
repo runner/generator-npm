@@ -15,8 +15,8 @@
         "test": "npm run lint"
     },
     "dependencies": {
-        "runner-logger": "^1.0.0",
-        "runner-tools": "^1.2.0"
+        "runner-logger": "^1.0.1",
+        "runner-tools": "^1.2.1"
     },
     "devDependencies": {
         "cjs-eslint": "^1.1.1"
