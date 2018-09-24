@@ -24,15 +24,15 @@ Add to the scope:
 var generator = require('runner-generator-npm');
 ```
 
+
 Generate tasks according to the given config:
 
 ```js
 var tasks = generator({
-    packageData: Object.assign(
-        require('package.main.json'),
-        require('package.extra.json')
-    ),
-    path: 'target-folder'
+    target: 'target-folder',
+    onPublish: function ( done ) {
+        done(null, require('package.json'));
+    }
 });
 ```
 
@@ -58,11 +58,11 @@ Generator accepts two arguments: base configuration and additional options.
 
 It's an object with the following properties:
 
- Name        | Description
--------------|-------------
- packageData | data which will be written to the package.json file 
- path        | folder in which the package.json file will be created
- command     | publish command which executes after writing package.json file
+ Name      | Description
+-----------|-------------
+ onPublish | hook to update the data which will be written to the package.json file
+ target    | folder in which the package.json file will be created
+ command   | publish command which executes after writing package.json file
  
 
 ### Additional options ###
