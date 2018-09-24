@@ -12,33 +12,45 @@ var path  = require('path'),
 
 
 function publish ( config, done ) {
-    tools.write([
-        {
-            name: path.join(config.path, 'package.json'),
-            data: JSON.stringify(config.packageData, null, 4)
-        }
-    ], log, function ( error ) {
-        if ( error ) {
-            done(error);
-        } else {
-            // package publish execution
-            exec(config.command, {cwd: config.path}, function ( error, stdout, stderr ) {
-                if ( error ) {
-                    log.warn(error.toString());
-                    done(error);
-                } else {
-                    (stdout + stderr).trim().split('\n').forEach(function ( line ) {
-                        if ( line.length !== 0 ) {
-                            log.info(line);
-                        }
-                    });
+    if ( typeof config.onPublish === 'function' ) {
+        config.onPublish(function ( error, data ) {
+            if ( error ) {
+                log.warn(error.toString);
+                done(error);
+            } else {
+                tools.write([
+                    {
+                        name: path.join(config.target, 'package.json'),
+                        data: JSON.stringify(data, null, 4)
+                    }
+                ], log, function ( error ) {
+                    if ( error ) {
+                        done(error);
+                    } else {
+                        // package publish execution
+                        exec(config.command, {cwd: config.target}, function ( error, stdout, stderr ) {
+                            if ( error ) {
+                                log.warn(error.toString());
+                                done(error);
+                            } else {
+                                (stdout + stderr).trim().split('\n').forEach(function ( line ) {
+                                    if ( line.length !== 0 ) {
+                                        log.info(line);
+                                    }
+                                });
 
-                    log.info('package %s is published', log.colors.bold(config.packageData.name));
-                    done();
-                }
-            });
-        }
-    });
+                                log.info('package %s is published', log.colors.bold(data.name));
+                                done();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    } else {
+        log.warn('no valid onPublish method');
+        done();
+    }
 }
 
 function generator ( config, options ) {
@@ -46,8 +58,8 @@ function generator ( config, options ) {
 
     // sanitize and extend defaults
     config = Object.assign({
-        packageData: {},
-        path: '.',
+        onPublish: null,
+        target: '.',
         command: 'npm publish'
     }, config);
     options = Object.assign(generator.options, options || {});
