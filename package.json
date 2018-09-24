@@ -1,6 +1,6 @@
 {
     "name": "runner-generator-npm",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Tasks generator for npm",
     "author": {
         "name": "Ivan Slobodnichenko",
