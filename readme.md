@@ -24,7 +24,6 @@ Add to the scope:
 var generator = require('runner-generator-npm');
 ```
 
-
 Generate tasks according to the given config:
 
 ```js
@@ -60,7 +59,7 @@ It's an object with the following properties:
 
  Name      | Description
 -----------|-------------
- onPublish | hook to update the data which will be written to the package.json file
+ onPublish | user callback executed before actual publishing to get the data which will be written to the package.json file
  target    | folder in which the package.json file will be created
  command   | publish command which executes after writing package.json file
  
