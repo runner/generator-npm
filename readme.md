@@ -30,7 +30,7 @@ Generate tasks according to the given config:
 var tasks = generator({
     target: 'target-folder',
     onPublish: function ( done ) {
-        done(null, require('package.json'));
+        done(null, require('./package.json'));
     }
 });
 ```
