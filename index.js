@@ -57,7 +57,7 @@ function generator ( config, options ) {
     var tasks = {};
 
     // sanitize and extend defaults
-    config = Object.assign({
+    generator.config = config = Object.assign({
         onPublish: null,
         target: '.',
         command: 'npm publish'
