@@ -61,7 +61,7 @@ function generator ( config, options ) {
         onPublish: null,
         target: '.',
         command: 'npm publish'
-    }, config);
+    }, config || {});
     options = Object.assign({}, generator.options, options || {});
 
     tasks[options.prefix + 'config' + options.suffix] = function () {
