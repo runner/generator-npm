@@ -4,7 +4,8 @@
 
 'use strict';
 
-var path  = require('path'),
+const
+    path  = require('path'),
     exec  = require('child_process').exec,
     name  = 'npm',
     tools = require('runner-tools'),
@@ -54,7 +55,7 @@ function publish ( config, done ) {
 }
 
 function generator ( config, options ) {
-    var tasks = {};
+    const tasks = {};
 
     // sanitize and extend defaults
     generator.config = config = Object.assign({
