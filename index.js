@@ -56,7 +56,9 @@ function publish ( config, done ) {
 
 
 function generator ( config = {}, options = {} ) {
-    const tasks = {};
+    const
+        tasks = {},
+        {prefix = name + ':', suffix = ''} = options;
 
     // sanitize and extend defaults
     config = Object.assign({
@@ -65,17 +67,11 @@ function generator ( config = {}, options = {} ) {
         command: 'npm publish'
     }, config);
 
-    // sanitize and extend defaults
-    options = Object.assign({}, {
-        prefix: name + ':',
-        suffix: ''
-    }, options);
-
-    tasks[options.prefix + 'config' + options.suffix] = function () {
+    tasks[prefix + 'config' + suffix] = function () {
         log.inspect(config, log);
     };
 
-    tasks[options.prefix + 'publish' + options.suffix] = function ( done ) {
+    tasks[prefix + 'publish' + suffix] = function ( done ) {
         publish(config, done);
     };
 
